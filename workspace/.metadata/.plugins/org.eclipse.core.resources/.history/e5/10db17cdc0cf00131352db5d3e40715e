@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="posr">
+        <property name="context-root" value="posra"/>
+        <property name="java-output-path" value="/posr/build/classes"/>
+    </wb-module>
+</project-modules>

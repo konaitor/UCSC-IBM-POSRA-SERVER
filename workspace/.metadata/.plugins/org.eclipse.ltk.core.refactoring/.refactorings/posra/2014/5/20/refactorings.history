@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;posra.servlets.FileCounter&apos; to &apos;Polymer&apos;&#x0D;&#x0A;- Original project: &apos;posra&apos;&#x0D;&#x0A;- Original element: &apos;posra.servlets.FileCounter&apos;&#x0D;&#x0A;- Renamed element: &apos;posra.servlets.Polymer&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;FileCounter&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;posra.servlets{FileCounter.java[FileCounter" matchStrategy="1" name="Polymer" qualified="false" references="true" similarDeclarations="false" stamp="1399936908977" textual="false" version="1.0"/>
+</session>
