@@ -18,9 +18,9 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import posra.Address;
-import posra.Employee;
 import posra.dataaccess.DB;
+import posra.dataaccess.Polymer;
+import posra.dataaccess.PolymerHome;
 
 /**
  * Servlet implementation class FileCounter
@@ -66,44 +66,23 @@ public class PolymerServlet extends HttpServlet {
     out.println("This site has been accessed " + count + " times.");
     
     // Sample json
-    Employee emp = createEmployee();
+    
  // Get Gson object
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String fileData = new String(Files.readAllBytes(Paths.get("Employee.txt")));
- // parse json string to object
-    Employee emp1 = gson.fromJson(fileData, Employee.class);
-    String jsonFromFile = gson.toJson(emp1);
-    String jsonEmp = gson.toJson(emp);
-    out.println("And here is a sample json serialized employee java object:\n\n " + jsonEmp);
-    out.println("\n\nAnd here is a sample json deserialized employee java object from employee.txt in eclipse root dir:\n\n " + jsonFromFile);
+   
+    Polymer poly = createPolymer();
+    String jsonPolymer = gson.toJson(poly, Polymer.class);
+    out.println("And here is a sample json serialized polymer java object:\n\n " + jsonPolymer);
+
   }
   
-  protected Employee createEmployee() {
+  protected Polymer createPolymer() {
 	  
-      Employee emp = new Employee();
-      emp.setId(100);
-      emp.setName("David");
-      emp.setPermanent(false);
-      emp.setPhoneNumbers(new long[] { 123456, 987654 });
-      emp.setRole("Manager");
-
-      Address add = new Address();
-      add.setCity("Bangalore");
-      add.setStreet("BTM 1st Stage");
-      add.setZipcode(560100);
-      emp.setAddress(add);
-
-      List<String> cities = new ArrayList<String>();
-      cities.add("Los Angeles");
-      cities.add("New York");
-      emp.setCities(cities);
-
-      Map<String, String> props = new HashMap<String, String>();
-      props.put("salary", "1000 Rs");
-      props.put("age", "28 years");
-      emp.setProperties(props);
-
-      return emp;
+	  Polymer p = new Polymer();
+	  p.setName("test");
+	  //PolymerHome ph = new PolymerHome();
+	  
+      return p;
   }
   
   public void destroy() {
