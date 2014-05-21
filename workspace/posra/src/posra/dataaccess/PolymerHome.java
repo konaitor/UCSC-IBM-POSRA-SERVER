@@ -1,6 +1,6 @@
 package posra.dataaccess;
 
-// Generated May 20, 2014 10:43:13 PM by Hibernate Tools 4.0.0
+// Generated May 21, 2014 12:12:02 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
 import javax.naming.InitialContext;
