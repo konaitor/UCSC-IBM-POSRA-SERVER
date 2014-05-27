@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2014 12:12:01 PM by Hibernate Tools 4.0.0 -->
+<!-- Generated May 27, 2014 2:46:51 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="posra.dataaccess.Segment" table="Segment" catalog="POSRA">
         <id name="segmentId" type="java.lang.Integer">
@@ -20,17 +20,11 @@
         <property name="degree" type="string">
             <column name="degree" not-null="true" />
         </property>
-        <set name="polymers" table="Polymer" inverse="true" lazy="true" fetch="select">
+        <set name="polymerRepeatUnitSegmentAssociations" table="PolymerRepeatUnitSegmentAssociation" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="segmentID" not-null="true" />
             </key>
-            <one-to-many class="posra.dataaccess.Polymer" />
-        </set>
-        <set name="repeatUnits" table="RepeatUnit" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="segmentID" not-null="true" />
-            </key>
-            <one-to-many class="posra.dataaccess.RepeatUnit" />
+            <one-to-many class="posra.dataaccess.PolymerRepeatUnitSegmentAssociation" />
         </set>
         <set name="segmentAssociationsForSegmentId2" table="SegmentAssociation" inverse="true" lazy="true" fetch="select">
             <key>

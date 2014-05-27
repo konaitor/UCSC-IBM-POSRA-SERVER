@@ -1,6 +1,6 @@
 package posra.dataaccess;
 
-// Generated May 21, 2014 12:12:01 PM by Hibernate Tools 4.0.0
+// Generated May 27, 2014 2:46:51 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,8 +15,7 @@ public class Segment implements java.io.Serializable {
 	private RepeatUnit repeatUnit;
 	private int bondCount;
 	private String degree;
-	private Set polymers = new HashSet(0);
-	private Set repeatUnits = new HashSet(0);
+	private Set polymerRepeatUnitSegmentAssociations = new HashSet(0);
 	private Set segmentAssociationsForSegmentId2 = new HashSet(0);
 	private Set segmentAssociationsForSegmentId1 = new HashSet(0);
 
@@ -29,15 +28,14 @@ public class Segment implements java.io.Serializable {
 	}
 
 	public Segment(Smiles smiles, RepeatUnit repeatUnit, int bondCount,
-			String degree, Set polymers, Set repeatUnits,
+			String degree, Set polymerRepeatUnitSegmentAssociations,
 			Set segmentAssociationsForSegmentId2,
 			Set segmentAssociationsForSegmentId1) {
 		this.smiles = smiles;
 		this.repeatUnit = repeatUnit;
 		this.bondCount = bondCount;
 		this.degree = degree;
-		this.polymers = polymers;
-		this.repeatUnits = repeatUnits;
+		this.polymerRepeatUnitSegmentAssociations = polymerRepeatUnitSegmentAssociations;
 		this.segmentAssociationsForSegmentId2 = segmentAssociationsForSegmentId2;
 		this.segmentAssociationsForSegmentId1 = segmentAssociationsForSegmentId1;
 	}
@@ -82,20 +80,13 @@ public class Segment implements java.io.Serializable {
 		this.degree = degree;
 	}
 
-	public Set getPolymers() {
-		return this.polymers;
+	public Set getPolymerRepeatUnitSegmentAssociations() {
+		return this.polymerRepeatUnitSegmentAssociations;
 	}
 
-	public void setPolymers(Set polymers) {
-		this.polymers = polymers;
-	}
-
-	public Set getRepeatUnits() {
-		return this.repeatUnits;
-	}
-
-	public void setRepeatUnits(Set repeatUnits) {
-		this.repeatUnits = repeatUnits;
+	public void setPolymerRepeatUnitSegmentAssociations(
+			Set polymerRepeatUnitSegmentAssociations) {
+		this.polymerRepeatUnitSegmentAssociations = polymerRepeatUnitSegmentAssociations;
 	}
 
 	public Set getSegmentAssociationsForSegmentId2() {

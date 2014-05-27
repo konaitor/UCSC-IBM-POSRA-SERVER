@@ -1,6 +1,6 @@
 package posra.dataaccess;
 
-// Generated May 21, 2014 12:12:01 PM by Hibernate Tools 4.0.0
+// Generated May 27, 2014 2:46:51 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
