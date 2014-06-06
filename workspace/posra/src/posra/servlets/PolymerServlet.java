@@ -97,13 +97,21 @@ public class PolymerServlet extends HttpServlet {
 			  out.print("<h5>File Uploaded, me thinks</h5>");
 			  out.print("<h5>New File's Path:</h5>");
 			  out.print("<h5>" + fileName + "</h5>");
+			  
+			  // Add POSRA CALL
+			  // "fileName" is fullPath to File On Server
+			  // "newFile" is the Java File. 
+			  //
+			  //
+			  
 			}catch(IOException e){
 				out.print("<h5>There was an error</h5>");
 				out.print("Debug: <br />Uploaded File Name: " + origFilePath + "<br />");
 				out.print("Destination Directory: " + filePath + "<br />");
 			}
 		  }  
-  }	
+  }
+  
   private String getUploadedFileName(Part p) {
 
       String file = "", header = "Content-Disposition";
