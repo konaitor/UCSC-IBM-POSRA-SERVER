@@ -36,11 +36,8 @@ public class PolymerServlet extends HttpServlet {
        
   int count;
   private DB dao;
-  private boolean isMultipart;
   private String filePath;
-  private int maxFileSize = 20 * 1024;
-  private int maxMemSize = 4 * 1024;
-  private File file ;
+  private File imagePath; 
 
   public void init() throws ServletException {
     dao = new DB();
@@ -53,6 +50,7 @@ public class PolymerServlet extends HttpServlet {
     }
     
     filePath = getServletContext().getInitParameter("image_location");
+    imagePath = new File(filePath);
   }
   
   
@@ -61,19 +59,29 @@ public class PolymerServlet extends HttpServlet {
 	 out.print("<!DOCTYPE html>\n<html lang=\"en\">");
 	 out.print("<head>\n\t<meta charset=\"utf-8\"/>\n\t<title>P-OSRA</title>\n</head>"); 
 	 out.print("<body>");
-	  for(Part part : request.getParts()) {
+	 
+	 if(!imagePath.exists()){
+		 if(!imagePath.mkdir()){
+			 throw new IOException("\"images\" directory could not be made.");
+		 }
+	 }
+	 
+	 //reading through request
+	 for(Part part : request.getParts()) {
 
           String name = part.getName();
 
           InputStream is = request.getPart(name).getInputStream();
 
+          //origFilePath is the path on the client of the file being uploaded
           String origFilePath = getUploadedFileName(part);
 
+          //the "fileName" will be the local path (filePath) and just the file name of the uploaded file.
     	  File newFile = new File(origFilePath);
     	  String fileName = filePath + newFile.getName();
-          try{
-        	  File fileDir = new File(filePath);
-        	  File file = File.createTempFile("posra", ".tmp", fileDir);
+          
+    	  //There is io here, a try/catch is needed in case there is a problem writing the file
+    	  try{
         	  FileOutputStream fos = new FileOutputStream(fileName);
 	          int data = 0;
 	
@@ -86,11 +94,11 @@ public class PolymerServlet extends HttpServlet {
 	          fos.close();
 	          is.close();
 
-			  out.print("<h5>File Uploaded, me thinks</h5><br />");
-			  out.print("<h5>New File's Path:</h5><br />");
-			  out.print("<h5>" + fileName + "</h5><br />");
-			}catch(Exception e){
-				out.print("<h5>There was an error</h5><br />");
+			  out.print("<h5>File Uploaded, me thinks</h5>");
+			  out.print("<h5>New File's Path:</h5>");
+			  out.print("<h5>" + fileName + "</h5>");
+			}catch(IOException e){
+				out.print("<h5>There was an error</h5>");
 				out.print("Debug: <br />Uploaded File Name: " + origFilePath + "<br />");
 				out.print("Destination Directory: " + filePath + "<br />");
 			}
