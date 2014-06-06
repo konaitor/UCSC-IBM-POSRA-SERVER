@@ -19,4 +19,10 @@
     <servlet-name>PolymerServlet</servlet-name>
     <url-pattern>/PolymerServlet</url-pattern>
   </servlet-mapping>
+  <context-param>
+  	<description>Image Location</description>
+  	<param-name>image_location</param-name> 
+    <param-value>${catalina.base}\webapps\images\</param-value>	
+  </context-param>
+    
 </web-app>
