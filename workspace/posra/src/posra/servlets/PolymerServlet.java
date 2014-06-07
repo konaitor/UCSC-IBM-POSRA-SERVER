@@ -1,10 +1,6 @@
 package posra.servlets;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,11 +28,28 @@ import com.google.gson.GsonBuilder;
 
 @MultipartConfig
 public class PolymerServlet extends HttpServlet {
+
+  //private final static String OSRA_LIB = "libosra_java";
+  static {
+    System.setProperty("line.separator","\n"); // so we won't have to mess with DOS line endings ever again
+    // load the shared osra library.
+    // NOTE that this is currently going to fail on 32bit cygwin using a 64bit VM under 64bit Eclipse!!
+    // workarounds: - use a 32bit VM under 32bit Eclipse
+    //              - try to build posra (and all its prereqs) under 64bit cygwin - some likelihood to fail with current immature state of 64bit cygwin  
+    //try {  
+    //  System.loadLibrary(OSRA_LIB);
+    //  System.out.println("done loading '" + OSRA_LIB + "'!");
+    //} catch (Error e) {
+    //  System.err.println("Error loading native library '" + OSRA_LIB + "'; java.library.path=" + System.getProperty("java.library.path"));
+    //  throw e; // re-throw
+    //}
+  }
+
   private static final long serialVersionUID = 1L;
        
   int count;
   private DB dao;
-  private String filePath;
+  private String filePath, osraPath;
   private File imagePath; 
 
   public void init() throws ServletException {
@@ -50,24 +63,28 @@ public class PolymerServlet extends HttpServlet {
     }
     
     filePath = getServletContext().getInitParameter("image_location");
+    osraPath = getServletContext().getInitParameter("osra_location");
     imagePath = new File(filePath);
+    
+    if (!new File(osraPath).exists()) {
+      System.err.println("POSRA binary '" + osraPath + "' not found!"); System.exit(1);
+    }
   }
-  
-  
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-	 PrintWriter out = response.getWriter();     
-	 out.print("<!DOCTYPE html>\n<html lang=\"en\">");
-	 out.print("<head>\n\t<meta charset=\"utf-8\"/>\n\t<title>P-OSRA</title>\n</head>"); 
-	 out.print("<body>");
-	 
-	 if(!imagePath.exists()){
-		 if(!imagePath.mkdir()){
-			 throw new IOException("\"images\" directory could not be made.");
-		 }
-	 }
-	 
-	 //reading through request
-	 for(Part part : request.getParts()) {
+
+  protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+    out.print("<!DOCTYPE html>\n<html lang=\"en\">");
+    out.print("<head>\n\t<meta charset=\"utf-8\"/>\n\t<title>P-OSRA</title>\n</head>");
+    out.print("<body>");
+
+    if (!imagePath.exists()) {
+      if (!imagePath.mkdir()) {
+        throw new IOException("\"images\" directory could not be made.");
+      }
+    }
+
+    // reading through request
+    for (Part part : request.getParts()) {
 
           String name = part.getName();
 
@@ -102,8 +119,17 @@ public class PolymerServlet extends HttpServlet {
 			  // "fileName" is fullPath to File On Server
 			  // "newFile" is the Java File. 
 			  //
-			  //
-			  
+        Process process = new ProcessBuilder(osraPath, "-r", "150", fileName).start();
+        try (BufferedReader pbr = new BufferedReader(new InputStreamReader(process.getInputStream()))) { // stdout from process
+          String line;
+          while ((line = pbr.readLine()) != null) {
+            System.out.println(line); break; // first line is SMILES
+          }
+          String SMILES = line;
+          out.print("<h5>SMILES is " + SMILES + "</h5>");
+          // ... process SMILES ...
+        }
+              
 			}catch(IOException e){
 				out.print("<h5>There was an error</h5>");
 				out.print("Debug: <br />Uploaded File Name: " + origFilePath + "<br />");
