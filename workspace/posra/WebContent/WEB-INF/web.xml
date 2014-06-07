@@ -24,5 +24,10 @@
   	<param-name>image_location</param-name> 
     <param-value>${catalina.base}\webapps\images\</param-value>	
   </context-param>
-    
+  <context-param>
+  	<description>Path to posra binary</description>
+  	<param-name>osra_location</param-name>
+  	<param-value>D:/Projects/Applications/GitHub/UCSC-IBM-POSRA-CORE/src/osra.exe</param-value>
+  </context-param>
+
 </web-app>
