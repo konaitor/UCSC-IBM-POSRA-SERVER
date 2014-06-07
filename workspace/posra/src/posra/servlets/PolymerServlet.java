@@ -16,7 +16,6 @@ import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import posra.dataaccess.DB;
 import posra.dataaccess.Polymer;
 
 import com.google.gson.Gson;
@@ -48,20 +47,10 @@ public class PolymerServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
        
   int count;
-  private DB dao;
   private String filePath, osraPath;
   private File imagePath; 
 
   public void init() throws ServletException {
-    dao = new DB();
-    try {
-      count = dao.getCount();
-    } catch (Exception e) {
-      getServletContext().log("An exception occurred in FileCounter", e);
-      throw new ServletException("An exception occurred in FileCounter"
-          + e.getMessage());
-    }
-    
     filePath = getServletContext().getInitParameter("image_location");
     osraPath = getServletContext().getInitParameter("osra_location");
     imagePath = new File(filePath);
@@ -195,11 +184,6 @@ public class PolymerServlet extends HttpServlet {
   
   public void destroy() {
     super.destroy();
-    try {
-      dao.save(count);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
   }
 
 } 
