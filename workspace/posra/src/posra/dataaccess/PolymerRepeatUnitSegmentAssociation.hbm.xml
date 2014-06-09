@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 28, 2014 12:19:45 PM by Hibernate Tools 4.0.0 -->
+<!-- Generated Jun 8, 2014 5:11:45 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="posra.dataaccess.PolymerRepeatUnitSegmentAssociation" table="PolymerRepeatUnitSegmentAssociation" catalog="POSRA">
         <composite-id name="id" class="posra.dataaccess.PolymerRepeatUnitSegmentAssociationId">
@@ -20,7 +20,7 @@
         </composite-id>
         <many-to-one name="repeatUnit" class="posra.dataaccess.RepeatUnit" update="false" insert="false" fetch="select">
             <column name="repeatUnitID" not-null="true">
-                <comment>XOR with PolymerID</comment>
+                <comment>/* comment truncated */ /*XOR with PolymerID*/</comment>
             </column>
         </many-to-one>
         <many-to-one name="segment" class="posra.dataaccess.Segment" update="false" insert="false" fetch="select">
@@ -28,7 +28,7 @@
         </many-to-one>
         <many-to-one name="polymer" class="posra.dataaccess.Polymer" update="false" insert="false" fetch="select">
             <column name="polymerID" not-null="true">
-                <comment>XOR with RepeatUnitID</comment>
+                <comment>/* comment truncated */ /*XOR with RepeatUnitID*/</comment>
             </column>
         </many-to-one>
         <property name="segmentType" type="char">

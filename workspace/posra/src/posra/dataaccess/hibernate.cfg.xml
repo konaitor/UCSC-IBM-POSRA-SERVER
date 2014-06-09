@@ -10,5 +10,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.default_schema">POSRA</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="transaction.manager_lookup_class">javax.transaction.UserTransaction</property>  
+		<property name="transaction.factory_class">org.hibernate.transaction.TransactionFactory</property> 
     </session-factory>
 </hibernate-configuration>

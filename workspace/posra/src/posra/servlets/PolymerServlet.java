@@ -15,8 +15,11 @@ import javax.servlet.http.Part;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import posra.dataaccess.Polymer;
+import posra.dataaccess.PolymerHome;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -151,25 +154,24 @@ public class PolymerServlet extends HttpServlet {
   // This is an unused method for now, but could be used for testing.
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // Set a cookie for the user, so that the counter does not increate
-    // every time the user press refresh
+    // every time the user presses refresh
     HttpSession session = request.getSession(true);
     // Set the session valid for 5 secs
     session.setMaxInactiveInterval(5);
     response.setContentType("text/plain");
     PrintWriter out = response.getWriter();
-   
-    if (session.isNew()) {
-      count++;
-    }
-    
-    out.println("This site has been accessed " + count + " times.");
     
     // Sample json
     
  // Get Gson object
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-   
+    
     Polymer poly = createPolymer();
+    poly.setName("Polystyrene");
+    
+    PolymerHome p = new PolymerHome();
+    p.persist(poly);
+   
     String jsonPolymer = gson.toJson(poly, Polymer.class);
     out.println("And here is a sample json serialized polymer java object:\n\n " + jsonPolymer);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 28, 2014 12:19:45 PM by Hibernate Tools 4.0.0 -->
+<!-- Generated Jun 8, 2014 5:11:45 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="posra.dataaccess.RepeatUnit" table="RepeatUnit" catalog="POSRA">
         <id name="repeatUnitId" type="java.lang.Integer">
@@ -17,7 +17,7 @@
         <set name="polymerRepeatUnitSegmentAssociations" table="PolymerRepeatUnitSegmentAssociation" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="repeatUnitID" not-null="true">
-                    <comment>XOR with PolymerID</comment>
+                    <comment>/* comment truncated */ /*XOR with PolymerID*/</comment>
                 </column>
             </key>
             <one-to-many class="posra.dataaccess.PolymerRepeatUnitSegmentAssociation" />

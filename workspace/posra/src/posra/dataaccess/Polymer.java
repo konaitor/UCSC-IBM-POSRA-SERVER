@@ -1,6 +1,6 @@
 package posra.dataaccess;
 
-// Generated May 28, 2014 12:19:44 PM by Hibernate Tools 4.0.0
+// Generated Jun 8, 2014 5:11:45 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +12,8 @@ public class Polymer implements java.io.Serializable {
 
 	private Integer polymerId;
 	private String name;
+	private String externalId;
 	private Set polymerRepeatUnitSegmentAssociations = new HashSet(0);
-	private Set externalIds = new HashSet(0);
 	private Set segmentAssociations = new HashSet(0);
 
 	public Polymer() {
@@ -23,11 +23,11 @@ public class Polymer implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Polymer(String name, Set polymerRepeatUnitSegmentAssociations,
-			Set externalIds, Set segmentAssociations) {
+	public Polymer(String name, String externalId,
+			Set polymerRepeatUnitSegmentAssociations, Set segmentAssociations) {
 		this.name = name;
+		this.externalId = externalId;
 		this.polymerRepeatUnitSegmentAssociations = polymerRepeatUnitSegmentAssociations;
-		this.externalIds = externalIds;
 		this.segmentAssociations = segmentAssociations;
 	}
 
@@ -47,6 +47,14 @@ public class Polymer implements java.io.Serializable {
 		this.name = name;
 	}
 
+	public String getExternalId() {
+		return this.externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
+
 	public Set getPolymerRepeatUnitSegmentAssociations() {
 		return this.polymerRepeatUnitSegmentAssociations;
 	}
@@ -54,14 +62,6 @@ public class Polymer implements java.io.Serializable {
 	public void setPolymerRepeatUnitSegmentAssociations(
 			Set polymerRepeatUnitSegmentAssociations) {
 		this.polymerRepeatUnitSegmentAssociations = polymerRepeatUnitSegmentAssociations;
-	}
-
-	public Set getExternalIds() {
-		return this.externalIds;
-	}
-
-	public void setExternalIds(Set externalIds) {
-		this.externalIds = externalIds;
 	}
 
 	public Set getSegmentAssociations() {

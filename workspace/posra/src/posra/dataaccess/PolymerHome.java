@@ -1,13 +1,16 @@
 package posra.dataaccess;
 
-// Generated May 28, 2014 12:19:45 PM by Hibernate Tools 4.0.0
+// Generated Jun 8, 2014 5:11:45 PM by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 /**
@@ -23,6 +26,9 @@ public class PolymerHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
+			SessionFactory sessionFactory = new Configuration().configure(
+                    "hibernate.cfg.xml")
+                    .buildSessionFactory();
 			return (SessionFactory) new InitialContext()
 					.lookup("SessionFactory");
 		} catch (Exception e) {
