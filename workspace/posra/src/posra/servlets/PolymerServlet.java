@@ -147,6 +147,8 @@ public class PolymerServlet extends HttpServlet {
       return file;
 
   }
+  
+  // This is an unused method for now, but could be used for testing.
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // Set a cookie for the user, so that the counter does not increate
     // every time the user press refresh
